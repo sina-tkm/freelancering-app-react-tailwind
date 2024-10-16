@@ -37,7 +37,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
     reset,
   } = useForm({ defaultValues: editValue });
   const [tags, setTags] = useState(prevTags || []);
-  
+
   const [date, setDate] = useState(new Date(deadline || ""));
   const { transformCategories } = useCategories();
   const { isCreating, craeteProject } = useCreateProject();
@@ -47,7 +47,6 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
       deadline: new Date(date).toISOString(),
       tags,
     };
-    console.log(newProject)
     if (isEditSession) {
       editProject(
         { id: editId, newProject },
@@ -116,7 +115,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
       <DatePickerField date={date} setDate={setDate} label='ددلاین' />
 
       <div className='!mt-8'>
-        {isCreating ? (
+        {isCreating || isEditing ? (
           <Loading />
         ) : (
           <button type='submit' className='btn btn--primary w-full mt-2'>

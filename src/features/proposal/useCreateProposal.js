@@ -1,14 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProjectApi } from "../../services/projectService";
 import toast from "react-hot-toast";
-export default function useCreateProject() {
+import { createProposalApi } from "../../services/prposalService";
+
+export default function useCreateProposal() {
   const queryClient = useQueryClient();
-  const { isPending: isCreating, mutate: craeteProject } = useMutation({
-    mutationFn: createProjectApi,
+  const {
+    mutateAsync: createProposal,
+    isPending: isCreating,
+  } = useMutation({
+    mutationFn: createProposalApi,
     onSuccess: (data) => {
       toast.success(data.message);
       queryClient.invalidateQueries({
-        queryKey: ["owner-projects"],
+        queryKey: ["proposal"],
       });
     },
     onError: (err) => {
@@ -17,5 +21,5 @@ export default function useCreateProject() {
       toast.error(errorMessage);
     },
   });
-  return { isCreating, craeteProject };
+  return { isCreating, createProposal };
 }

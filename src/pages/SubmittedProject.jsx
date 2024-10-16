@@ -3,7 +3,7 @@ import ProjectTable from "../features/freelancer/project/ProjectTable";
 
 function SubmittedProject() {
   return (
-    <div>
+    <div> 
       <ProjectHeader />
       <ProjectTable />
     </div>

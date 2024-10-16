@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useLoacaleStorageState } from "../hooks/useLocaleStorageState";
 
 const DarkModeContext = createContext();
