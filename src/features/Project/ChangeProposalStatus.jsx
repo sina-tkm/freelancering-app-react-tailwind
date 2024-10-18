@@ -18,14 +18,15 @@ const option = [
     value: "2",
   },
 ];
-function ChangeProposalStatus({ proposaId, onClose, proposalStatus }) {
+function ChangeProposalStatus({ proposalId, onClose }) {
   const { id: projectId } = useParams();
+  console.log(projectId, proposalId);
   const { register, handleSubmit } = useForm({});
   const { isUpdating, changeProposalStatus } = useChangeProposalStatus();
   const queryClient = useQueryClient();
   const onSubmit = (data) => {
     changeProposalStatus(
-      { id: proposaId, data },
+      { id: proposalId, projectId, ...data },
       {
         onSuccess: () => {
           onClose();
@@ -40,7 +41,6 @@ function ChangeProposalStatus({ proposaId, onClose, proposalStatus }) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <RHFSelect
         register={register}
-        proposalStatus={proposalStatus}
         name='status'
         label='تغییر وضعیت'
         required

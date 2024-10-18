@@ -18,8 +18,7 @@ const statusStyle = [
   },
 ];
 function ProposalRow({ proposal, index }) {
-  const { status, user } = proposal;
-
+  const { status} = proposal;
   const [open, setOpen] = useState(false);
   return (
     <Table.row>
@@ -30,9 +29,9 @@ function ProposalRow({ proposal, index }) {
       </td>
       <td>{proposal.duration}روز</td>
       <td>{proposal.price}</td>
-      <span className={`badge ${statusStyle[status].className} my-4`}>
+      <td className={`badge ${statusStyle[status].className} my-4`}>
         {statusStyle[status].label}
-      </span>
+      </td>
       <td>
         <Modal
           title='تغییر وضعیت درخواست'
@@ -40,8 +39,8 @@ function ProposalRow({ proposal, index }) {
           onClose={() => setOpen(false)}
         >
           <ChangeProposalStatus
-            proposalStatus={status}
-            proposaId={proposal._id}
+      
+            proposalId={proposal._id}
             onClose={() => setOpen(false)}
           />
         </Modal>
