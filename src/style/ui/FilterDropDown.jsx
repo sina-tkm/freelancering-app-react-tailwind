@@ -7,9 +7,8 @@ function FilterDropDown({ options, filterField }) {
   const value = searchParams.get(filterField) || "";
 
   function handleChange(e) {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set(filterField, e.target.value);
-    setSearchParams(newSearchParams);
+    searchParams.set(filterField, e.target.value);
+    setSearchParams(searchParams);
   }
 
   return <Select value={value} onChange={handleChange} options={options} />;

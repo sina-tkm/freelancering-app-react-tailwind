@@ -76,7 +76,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
         validationSchema={{
           required: "عنوان ضروری است",
           minLength: {
-            value: 10,
+            value:4,
             message: "طول عنوان نامعتبر است",
           },
         }}
