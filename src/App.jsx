@@ -15,6 +15,7 @@ import Proposals from "./pages/Proposals";
 import SubmittedProject from "./pages/SubmittedProject";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ProtectedRoute from "./style/ui/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -25,22 +26,36 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Toaster />
           <Routes>
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/complete-profile" element={<CompleteProfile />} />
-            <Route path="/owner" element={<OwnerLayOut />}>
-              <Route index element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<OwnerDashboard />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="projects/:id" element={<Project />} />
+            <Route path='/auth' element={<Auth />} />
+            <Route path='/complete-profile' element={<CompleteProfile />} />
+            <Route
+              path='/owner'
+              element={
+                <ProtectedRoute>
+                  <OwnerLayOut />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to='dashboard' replace />} />
+              <Route path='dashboard' element={<OwnerDashboard />} />
+              <Route path='projects' element={<Projects />} />
+              <Route path='projects/:id' element={<Project />} />
             </Route>
-            <Route path="freelancer" element={<FreelancerLayout />}>
-              <Route index element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<FreelancerDashboard />} />
-              <Route path="proposals" element={<Proposals />} />
-              <Route path="projects" element={<SubmittedProject />} />
+            <Route
+              path='freelancer'
+              element={
+                <ProtectedRoute>
+                  <FreelancerLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to='dashboard' replace />} />
+              <Route path='dashboard' element={<FreelancerDashboard />} />
+              <Route path='proposals' element={<Proposals />} />
+              <Route path='projects' element={<SubmittedProject />} />
             </Route>
-            <Route path="/" element={<Home />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path='/' element={<Home />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

@@ -13,6 +13,8 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
   const { _id: editId } = projectToEdit;
   const isEditSession = Boolean(editId);
   const { isEditing, editProject } = useEditProject();
+
+
   const {
     title,
     description,
@@ -21,6 +23,8 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
     deadline,
     tags: prevTags,
   } = projectToEdit;
+
+  
   let editValue = {};
   if (isEditSession) {
     editValue = {
