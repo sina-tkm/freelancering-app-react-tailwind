@@ -5,7 +5,7 @@ import Filter from "../../../style/Filter";
 const sortOptions = [
   {
     label: "مرتب سازی(جدیدترین)",
-    value: "lastet",
+    value: "latest",
   },
   {
     label: "مرتب سازی(قدیمی ترین )",

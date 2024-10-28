@@ -10,6 +10,7 @@ function AthContainer() {
   const [step, setStep] = useState(1);
   const { register, handleSubmit, getValues } = useForm();
 
+
   const {
     isPending: isSendingOtp,
     mutateAsync,
@@ -20,7 +21,10 @@ function AthContainer() {
 
   const sendOtpHandler = async (data) => {
     try {
-      const { message } = await mutateAsync(data);
+      const { message } = await mutateAsync(data,{
+    
+      });
+      
       toast.success(message);
     } catch (error) {
       toast.error(error?.response?.data?.message || "مشکلی پیش آمده است.");
