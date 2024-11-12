@@ -5,10 +5,11 @@ export default function useAuthorized() {
   const { user, isLoading } = useUser();
   const { pathname } = useLocation();
 
-  let isAuthenticated = false;
-  if (user) isAuthenticated = true;
+  const isAuthenticated = !!user;
 
   let isAuthorized = false;
+  let isVerified = false;
+  if (user && Number(user.status) === 2) isVerified = true;
   const ROLE = {
     admin: "ADMIN",
     freelancer: "FREELANCER",
@@ -22,5 +23,5 @@ export default function useAuthorized() {
     }
   }
 
-  return { isAuthorized, isLoading, user, isAuthenticated };
+  return { isAuthorized, isLoading, user, isAuthenticated, isVerified };
 }

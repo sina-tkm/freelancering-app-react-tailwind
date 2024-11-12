@@ -31,7 +31,6 @@ function CheckOtpForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
           const { message, user } = data;
           toast.success(message);
 
-          
           if (!user.isActive) {
             return navigate("/complete-profile");
           }
@@ -44,6 +43,7 @@ function CheckOtpForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
           const roleRoutes = {
             OWNER: "/owner",
             FREELANCER: "/freelancer",
+            ADMIN: "/admin",
           };
           navigate(roleRoutes[user.role] || "/");
         },

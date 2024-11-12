@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "./style/ui/NotFound";
 import Auth from "./pages/Auth";
+import AdminDashboard from "./pages/AdminDashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import CompleteProfile from "./pages/CompleteProfile";
@@ -16,6 +17,8 @@ import SubmittedProject from "./pages/SubmittedProject";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedRoute from "./style/ui/ProtectedRoute";
+import AdminLayout from "./features/admin/AdminLayout";
+import Users from "./pages/Users";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +45,7 @@ function App() {
               <Route path='projects/:id' element={<Project />} />
             </Route>
             <Route
-              path='freelancer'
+              path='/freelancer'
               element={
                 <ProtectedRoute>
                   <FreelancerLayout />
@@ -54,7 +57,22 @@ function App() {
               <Route path='proposals' element={<Proposals />} />
               <Route path='projects' element={<SubmittedProject />} />
             </Route>
-            <Route path='/' element={<Home />} />
+
+            <Route
+              path='/admin'
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to='dashboard' replace />} />
+              <Route path='dashboard' element={<AdminDashboard />} />
+              <Route path='users' element={<Users />} />
+              <Route path='proposals' element={<Proposals />} />
+              <Route path='projects' element={<SubmittedProject />} />
+            </Route>
+            <Route path='/' element={<Home />} /> 
             <Route path='*' element={<NotFound />} />
           </Routes>
           <ReactQueryDevtools initialIsOpen={false} />
